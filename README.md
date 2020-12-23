@@ -4,7 +4,7 @@
 
 - 언어를 공부하는 것도 중요하지만 언어의 탄생 배경과 어떻게 발전되어 왔는지 왜 많이 사용하는지에 대해 알고 가는 것도 중요하다.
 
-(javascript.PNG img file space)
+![javascript](./images/javascript.PNG)
 
 - 가벼운 마음으로 영상 시청😃
 
