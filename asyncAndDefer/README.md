@@ -1,6 +1,8 @@
 # JavaScript ES 5+(async, defer)
 
-# parsing이란?
+- js를 HTML에 포함시킬 때 사용할 수 있는 2가지 옵션을 알아본다.
+
+## parsing이란?
 
 - 기본적으로 HTML문서는 parsing(컴퓨터가 코드를 분석하고 이해하는 과정)을 거쳐서 동작하는데, 여기서 javascript는 또한 parsing되며 실행된다.
 
