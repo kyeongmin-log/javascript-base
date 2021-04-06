@@ -1,128 +1,95 @@
 "use strict";
-// Object-oriendted programming
-// class: template
-// object: instance of a class
-// JavaScript classes
-//  - introduced in ES6
-//  - syntactical sugar over prototype-based inheritance
+// Objects
+// one of the JavaScript's data types.
+// a collection of related data and/or functionality.
+// Nearly all objects in JavaScript are instances of Object
+// object = { key : value };
+const obj1 = {}; // 'object literal' syntax
+const obj2 = new Object(); // 'object constructor' syntax
 
-// 1. Class declarations
-class Person {
-  // constructor
-  constructor(name, age) {
-    // fields
-    this.name = name;
-    this.age = age;
-  }
-
-  // methods
-  speak() {
-    console.log(`${this.name}: hello!`);
-  }
+function print(person) {
+  console.log(person.name);
+  console.log(person.age);
 }
 
-const kyeongmin = new Person("kyeongmin", 27);
+const kyeongmin = { name: "kyeongmin", age: 4 };
+print(kyeongmin);
+
+// with JavaScript magic (dynamically typed language)
+// can add properties later
+kyeongmin.hasJob = true;
+console.log(kyeongmin.hasJob);
+
+// can delete properties later
+delete kyeongmin.hasJob;
+console.log(kyeongmin.hasJob);
+
+// 2. Computed properties
+// key should be always string
 console.log(kyeongmin.name);
-console.log(kyeongmin.age);
-kyeongmin.speak();
+console.log(kyeongmin["name"]);
+kyeongmin["hasJob"] = true;
+console.log(kyeongmin.hasJob);
 
-// 2. Getter and setters
-class User {
-  constructor(firstName, lastName, age) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.age = age;
-  }
+function printValue(obj, key) {
+  console.log(obj[key]);
+}
+printValue(kyeongmin, "name");
+printValue(kyeongmin, "age");
 
-  get age() {
-    return this._age;
-  }
+// 3. Property value shorthand
+const person1 = { name: "bob", age: 2 };
+const person2 = { name: "steve", age: 3 };
+const person3 = { name: "dave", age: 4 };
+const person4 = new Person("elile", 30);
+console.log(person4);
 
-  set age(value) {
-    // if (value < 0) {
-    //   throw Error('age can not be negative');
-    // }
-    this._age = value < 0 ? 0 : value;
-  }
+// 4. Constructor Function
+function Person(name, age) {
+  // this = {};
+  this.name = name;
+  this.age = age;
+  // return this;
 }
 
-const user1 = new User("Steve", "Job", -1);
-console.log(user1.age);
-
-// 3. Fields (public, private)
-// Too soon!
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Class_fields
-class Experiment {
-  publicField = 2;
-  #privateField = 0;
-}
-const experiment = new Experiment();
-console.log(experiment.publicField);
-console.log(experiment.privateField);
-
-// 4. Static properties and methods
-// Too soon!
-class Article {
-  static publisher = "Dream Coding";
-  constructor(articleNumber) {
-    this.articleNumber = articleNumber;
-  }
-
-  static printPublisher() {
-    console.log(Article.publisher);
-  }
+// 5. in operator: property existence check (key in obj)
+console.log("name" in kyeongmin);
+console.log("age" in kyeongmin);
+console.log("random" in kyeongmin);
+console.log(kyeongmin.random);
+// 6. for..in vs for..of
+// for (key in obj)
+console.clear();
+for (let key in kyeongmin) {
+  console.log(key);
 }
 
-const article1 = new Article(1);
-const article2 = new Article(2);
-console.log(Article.publisher);
-Article.printPublisher();
-
-// 5. Inheritance
-// a way for one class to extend another class.
-class Shape {
-  constructor(width, height, color) {
-    this.width = width;
-    this.height = height;
-    this.color = color;
-  }
-
-  draw() {
-    console.log(`drawing ${this.color} color!`);
-  }
-
-  getArea() {
-    return this.width * this.height;
-  }
+// for (value of iterable)
+const array = [1, 2, 4, 5];
+for (let value of array) {
+  console.log(value);
 }
 
-class Rectangle extends Shape {}
-class Triangle extends Shape {
-  draw() {
-    super.draw(); //상속받은 클래스(부모클래스)의 메소드 사용.
-    console.log("🔺");
-  }
-  getArea() {
-    //오버라이딩(메소드 재정의)
-    return (this.width * this.height) / 2;
-  }
+// 7. Fun cloning
+// Object.assign(dest, [obj1, obj2, obj3...])
+const user = { name: "kyeongmin", age: "20" };
+const user2 = user;
+console.log(user);
 
-  toString() {
-    return `Triangle: color: ${this.color}`;
-  }
+// old way
+const user3 = {};
+for (let key in user) {
+  user3[key] = user[key];
 }
+console.clear();
+console.log(user3);
 
-const rectangle = new Rectangle(20, 20, "blue");
-rectangle.draw();
-console.log(rectangle.getArea());
-const triangle = new Triangle(20, 20, "red");
-triangle.draw();
-console.log(triangle.getArea());
+const user4 = Object.assign({}, user);
+console.log(user4);
 
-// 6. Class checking: instanceOf
-console.log(rectangle instanceof Rectangle);
-console.log(triangle instanceof Rectangle);
-console.log(triangle instanceof Triangle);
-console.log(triangle instanceof Shape);
-console.log(triangle instanceof Object);
-console.log(triangle.toString());
+// another example
+const fruit1 = { color: "red" };
+const fruit2 = { color: "blue", size: "big" };
+const mixed = Object.assign({}, fruit1, fruit2);
+console.log(mixed.color);
+console.log(mixed.size);
