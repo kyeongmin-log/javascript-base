@@ -41,7 +41,7 @@ printValue(kyeongmin, "age");
 const person1 = { name: "bob", age: 2 };
 const person2 = { name: "steve", age: 3 };
 const person3 = { name: "dave", age: 4 };
-const person4 = new Person("elile", 30);
+const person4 = new Person("kyeongmin", 30);
 console.log(person4);
 
 // 4. Constructor Function
@@ -84,6 +84,7 @@ for (let key in user) {
 console.clear();
 console.log(user3);
 
+//new way
 const user4 = Object.assign({}, user);
 console.log(user4);
 
