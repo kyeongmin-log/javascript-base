@@ -37,10 +37,22 @@ const userInfo = {
   password: "dream",
 };
 
+//promise
 userStorage
   .loginUser(userInfo.id, userInfo.password)
   .then((id) => userStorage.getRoles(id))
-  .then((user) => console.log(`name : ${user.name}, role: ${user.role}`));
+  .then((user) =>
+    console.log(`promise => name : ${user.name}, role: ${user.role}`)
+  );
+
+//async, await
+(async function printRole() {
+  const user = await userStorage.loginUser(userInfo.id, userInfo.password);
+  const getRoleUser = await userStorage.getRoles(user);
+  console.log(
+    `async, await => name : ${getRoleUser.name}, role: ${getRoleUser.role}`
+  );
+})();
 
 // Callback Hell example(ellie)
 // Original code from Youtube course
@@ -52,6 +64,14 @@ userStorage
 //   .then(userStorage.getRoles)
 //   .then((user) => alert(`Hello ${user.name}, you have a ${user.role} role`))
 //   .catch(console.log);
+
+//   // Homework Answer 🚀
+//   async getUserWithRole(user, password) {
+//     const user = await this.loginUser(user, password);
+//     const role = await this.getRoles(user);
+//     return role;
+//   }
+// }
 
 // // Homework Answer 🚀
 // userStorage
